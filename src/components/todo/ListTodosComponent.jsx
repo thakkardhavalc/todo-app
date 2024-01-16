@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { deleteTodoApi, retriveAllTodosForUsernameApi } from "./api/TodoApiService";
-//import { useAuth } from "./security/AuthContext";
+import { useAuth } from "./security/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 export function ListTodosComponent() {
 
@@ -8,14 +9,16 @@ export function ListTodosComponent() {
 
     const [message, setMessage]= useState(null)
 
-    //const authContext = useAuth()
+    const authContext = useAuth()
 
-    //const username = authContext.username
+    const username = authContext.username
+
+    const navigate = useNavigate()
 
     useEffect ( () => refreshTodos(), [] )
 
     function refreshTodos() {
-        retriveAllTodosForUsernameApi('in28minutes')
+        retriveAllTodosForUsernameApi(username)
             .then((response) => {
                 setTodos(response.data)
             }) 
@@ -23,7 +26,7 @@ export function ListTodosComponent() {
     }
 
     function deleteTodo(id) {
-        deleteTodoApi('in28minutes', id)
+        deleteTodoApi(username, id)
             .then(
                 () => {
                     setMessage(`Delete of todo with id = ${id} successful`)
@@ -35,7 +38,8 @@ export function ListTodosComponent() {
     }
 
     function updateTodo(id) {
-        
+        console.log('Clicked: ' + id)
+        navigate(`/todo/${id}`)
     }
 
     return (

@@ -4,7 +4,7 @@ import { useAuth } from './security/AuthContext';
 
 export function LoginComponent() {
 
-    const [username, setUsername] = useState('admin');
+    const [username, setUsername] = useState('in28minutes');
 
     const [password, setPassword] = useState('');
 
