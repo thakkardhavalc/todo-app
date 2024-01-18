@@ -15,6 +15,7 @@ export function ListTodosComponent() {
 
     const navigate = useNavigate()
 
+    // eslint-disable-next-line
     useEffect ( () => refreshTodos(), [] )
 
     function refreshTodos() {
@@ -40,6 +41,10 @@ export function ListTodosComponent() {
     function updateTodo(id) {
         console.log('Clicked: ' + id)
         navigate(`/todo/${id}`)
+    }
+
+    function addNewTodo() {
+        navigate(`/todo/-1`)
     }
 
     return (
@@ -79,6 +84,9 @@ export function ListTodosComponent() {
                         )}
                     </tbody>
                 </table>
+            </div>
+            <div className="btn btn-success m-5"
+                onClick={addNewTodo}>Add New Todo
             </div>
         </div>
     );
